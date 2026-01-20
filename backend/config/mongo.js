@@ -13,4 +13,5 @@ async function mango() {
   }
 }
 
-module.exports = { mango, mongoose };
+module.exports = mango;
+module.exports.mongoose = mongoose;
