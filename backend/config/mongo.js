@@ -1,10 +1,15 @@
-const mongoose= require('mongoose');
+const { MongoClient } = require("mongodb");
 
-const mango= async ()=>{
-try{await mongoose.connect(process.env.MONGO_URI)
-    console.log(`mongoose connected`)
-}
-catch(error){console.log(error)}
+const uri = process.env.MONGO_URI;
+
+async function mango() {
+  const client = new MongoClient(uri);
+  try {
+    await client.connect();
+    console.log("MongoDB Connected");
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-module.exports=mango;
+module.exports = mango;

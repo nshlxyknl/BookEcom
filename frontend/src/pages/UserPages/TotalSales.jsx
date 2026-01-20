@@ -11,6 +11,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { API_URL } from '@/config/api'
 
 
 export const TotalSales = () => {
@@ -20,7 +21,7 @@ export const TotalSales = () => {
 
     const handlesales=async()=>{
       try {
-        const res= await fetch(`http://localhost:4000/salestype/sales`,
+        const res= await fetch(`${API_URL}/salestype/sales`,
         {method: "GET",
           headers:{
             Authorization:`Bearer ${localStorage.getItem("token")}`
@@ -46,7 +47,7 @@ export const TotalSales = () => {
 
 const updateStatus = async (id, status) => {
   try {
-    const res = await fetch(`http://localhost:4000/salestype/${id}/status`, {
+    const res = await fetch(`${API_URL}/salestype/${id}/status`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

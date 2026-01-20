@@ -1,5 +1,6 @@
 
 import { Button } from '@/components/ui/button'
+import { API_URL } from '@/config/api'
 import { useCart } from '@/context/CartContext'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
@@ -13,7 +14,7 @@ export const SheetCard = ({ productId, title, price, quantity,  refreshCart  }) 
   //yo ni thik xa useeefeect 
   const pluscart = async () => {
     try {
-      const res = await fetch("http://localhost:4000/carttype/plus",
+      const res = await fetch(`${API_URL}/carttype/plus`,
         {
           method: "POST",
           headers: {
@@ -44,7 +45,7 @@ export const SheetCard = ({ productId, title, price, quantity,  refreshCart  }) 
   //yo thik xa
   const delcart = async () => {
     try {
-      const res = await fetch(`http://localhost:4000/carttype/delete/${productId._id}`, {
+      const res = await fetch(`${API_URL}/carttype/delete/${productId._id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -75,7 +76,7 @@ export const SheetCard = ({ productId, title, price, quantity,  refreshCart  }) 
   // yo ni thik xa  tara useeefct 
   const clearproduct = async () => {
     try {
-      const res = await fetch(`http://localhost:4000/carttype/clean/${productId}`, {
+      const res = await fetch(`${API_URL}/carttype/clean/${productId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`

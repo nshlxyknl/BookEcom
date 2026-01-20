@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import CartContext from './CartContext';
 import { toast } from 'sonner';
+import { API_URL } from '@/config/api';
 
 export const CartProvider = ({ children }) => {
 
@@ -14,7 +15,7 @@ const [cartItems, setCartItems] = useState([]);
 
   const cartadd= async({ _id, title, price, quantity })=>{
       try {
-        const res = await fetch("http://localhost:4000/carttype/add",
+        const res = await fetch(`${API_URL}/carttype/add`,
           {
             method: "POST",
             headers: {

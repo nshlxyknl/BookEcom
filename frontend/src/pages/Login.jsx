@@ -5,6 +5,7 @@ import { Button } from '../components/ui/button'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
 import { toast } from 'sonner'
+import { API_URL } from '@/config/api'
 
 export const Login = () => {
     const [username, setUsername] = useState("");
@@ -16,7 +17,7 @@ const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:4000/logtype/login", {
+      const res = await fetch(`${API_URL}/logtype/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password  }),

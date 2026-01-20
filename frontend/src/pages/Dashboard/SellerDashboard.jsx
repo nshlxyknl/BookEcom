@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
+import { API_URL } from "@/config/api"
 import { useCount } from "@/context/CountContext"
 import { ShoppingCart, Package } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -38,7 +39,7 @@ export default function SellerDashboard() {
      formdata.append("pdf", pdfFile)
 
     try {
-      const res = await fetch("http://localhost:4000/tasktype/upload", {
+      const res = await fetch(`${API_URL}/tasktype/upload`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

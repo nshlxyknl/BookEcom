@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { AdminCardUser } from './AdminCardUser'
 import { useCount } from '@/context/CountContext';
+import { API_URL } from '@/config/api';
 
 export const ManageUsers = () => {
   const [user, setUser] = useState([])
@@ -8,7 +9,7 @@ export const ManageUsers = () => {
 
 
   const handleusers = async () => {
-    const res = await fetch("http://localhost:4000/tasktype/users", {
+    const res = await fetch(`${API_URL}/tasktype/users`, {
       method: "GET",
       headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` },
     })

@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { API_URL } from '@/config/api';
 import React, { useEffect } from 'react'
 import { toast } from 'sonner';
 
@@ -10,7 +11,7 @@ export const AdminCardPdf = ({ _id, username, title, price, onDelete }) => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`http://localhost:4000/tasktype/del/${_id}`, {
+      const res = await fetch(`${API_URL}/tasktype/del/${_id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

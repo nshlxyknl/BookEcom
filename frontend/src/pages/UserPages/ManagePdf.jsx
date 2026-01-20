@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { AdminCardPdf } from './AdminCardPdf'
 import { useCount } from '@/context/CountContext';
+import { API_URL } from '@/config/api';
 
 export const ManagePdf = () => {
   const [pdf, setPdf] = useState([])
@@ -8,7 +9,7 @@ export const ManagePdf = () => {
 
 
   const handlepdf = async () => {
-    const res = await fetch("http://localhost:4000/tasktype/all", {
+    const res = await fetch(`${API_URL}/tasktype/all`, {
       method: "GET",
       headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` },
     })

@@ -5,6 +5,7 @@ import BuyerDashboard from "./BuyerDashboard";
 import SellerDashboard from "./SellerDashboard";
 import { HomePage } from "../HomePage";
 import { toast } from "sonner";
+import { API_URL } from "@/config/api";
 
 const Dashboard = () => {
   const role = localStorage.getItem("role");
@@ -24,7 +25,7 @@ const Dashboard = () => {
 console.log("Items sent to pending:", purchasedItems);
 
       if (purchasedItems.length > 0) {
-      fetch("http://localhost:4000/salestype/pending", {
+      fetch(`${API_URL}/salestype/pending`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

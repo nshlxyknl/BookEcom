@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useCount } from '@/context/CountContext';
 import SellerCard from './SellerCard';
+import { API_URL } from '@/config/api';
 
 export const SellerUploads = () => {
 
@@ -10,7 +11,7 @@ export const SellerUploads = () => {
       
         const fetchUploads = async () => {
           try {
-            const res = await fetch("http://localhost:4000/tasktype/user",{
+            const res = await fetch(`${API_URL}/tasktype/user`,{
               method:"GET",
                headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

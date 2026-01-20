@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import BuyerCard from "../UserPages/BuyerCard";
 import { useSearch } from "@/context/SearchContext";
 import { useSidebar } from "@/context/SidebarContext";
+import { API_URL } from "@/config/api";
 
 
 export default function BuyerDashboard() {
@@ -12,7 +13,7 @@ export default function BuyerDashboard() {
 
   const fetchUploads = async () => {
     try {
-      const res = await fetch("http://localhost:4000/tasktype/all", {
+      const res = await fetch(`${API_URL}/tasktype/all`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -27,7 +28,7 @@ export default function BuyerDashboard() {
 
   const fetchPurchases = async () => {
     try {
-      const res = await fetch("http://localhost:4000/salestype/orders", {
+      const res = await fetch(`${API_URL}/salestype/orders`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       const data = await res.json();

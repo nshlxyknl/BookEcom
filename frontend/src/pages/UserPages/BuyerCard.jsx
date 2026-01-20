@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Reviews } from "./Reviews";
 import { toast } from "sonner";
+import { API_URL } from "@/config/api";
 
 
 
@@ -27,7 +28,7 @@ export default function BuyerCard({ _id, title, price,productId, quantity, pdfUr
       const cart = [{ title, price, quantity: r, productId }]
       sessionStorage.setItem("purchasedItems", JSON.stringify(cart));
 
-      const res = await fetch("http://localhost:4000/carttype/pay", {
+      const res = await fetch(`${API_URL}/carttype/pay`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -68,7 +69,7 @@ export default function BuyerCard({ _id, title, price,productId, quantity, pdfUr
     setLoading(true)
 
     try {
-      const res = await fetch(`http://localhost:4000/retype/add/${_id}`, {
+      const res = await fetch(`${API_URL}/retype/add/${_id}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -109,7 +110,7 @@ export default function BuyerCard({ _id, title, price,productId, quantity, pdfUr
 
   const handleget = async () => {
     try {
-      const res = await fetch(`http://localhost:4000/retype/see/${_id}`, {
+      const res = await fetch(`${API_URL}/retype/see/${_id}`, {
         method: "GET",
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       })

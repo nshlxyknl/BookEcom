@@ -10,6 +10,7 @@ import { useSearch } from '@/context/SearchContext';
 import { SidebarLay } from '@/pages/UserPages/SidebarLay';
 import { useSidebar } from '@/context/SidebarContext';
 import { toast } from 'sonner';
+import { API_URL } from '@/config/api';
 
 
 
@@ -33,7 +34,7 @@ export default function Navbar() {
 
   const fetchUploads = async () => {
     try {
-      const res = await fetch("http://localhost:4000/carttype/get", {
+      const res = await fetch(`${API_URL}/carttype/get`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -56,7 +57,7 @@ export default function Navbar() {
   const clearcart = async () => {
     toast.success("clear cart")
     try {
-      const res = await fetch("http://localhost:4000/carttype/clearcart", {
+      const res = await fetch(`${API_URL}/carttype/clearcart`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -85,7 +86,7 @@ export default function Navbar() {
       }
         sessionStorage.setItem("purchasedItems", JSON.stringify(cart));
 
-      const res = await fetch("http://localhost:4000/carttype/pay", {
+      const res = await fetch(`${API_URL}/carttype/pay`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -5,6 +5,7 @@ import { Button } from '../components/ui/button'
 import { Link, useNavigate} from 'react-router-dom'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from 'sonner'
+import { API_URL } from '@/config/api'
 
 export const Register = () => {
 
@@ -17,7 +18,7 @@ export const Register = () => {
   e.preventDefault();
 
 try{
-const res= await fetch("http://localhost:4000/logtype/register",{
+const res= await fetch(`${API_URL}/logtype/register`,{
   method: "POST",
   headers: { "Content-Type":"application/json"},
   body: JSON.stringify({ username, password , role }),
