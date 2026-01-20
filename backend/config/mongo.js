@@ -1,14 +1,16 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
+
+mongoose.set("bufferCommands", false); 
 
 const uri = process.env.MONGO_URI;
 
 async function mango() {
-  const client = new MongoClient(uri);
   try {
-    await client.connect();
-    console.log("MongoDB Connected");
+    await mongoose.connect(uri);
+    console.log("✅ MongoDB Connected (mongoose)");
   } catch (error) {
-    console.error(error);
+    console.error("❌ MongoDB connection failed:", error.message);
+    process.exit(1);
   }
 }
 
