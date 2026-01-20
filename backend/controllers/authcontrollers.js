@@ -1,21 +1,11 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
-/**
- * Authentication Controller
- * Handles user registration, login, and profile management
- */
 
-/**
- * Register a new user
- * @route POST /api/auth/register
- * @public - Anyone can access this route
- */
 exports.register = async (req, res) => {
   try {
     const { username, password, role } = req.body;
 
-    // Security: Check for duplicate usernames
     const userExists = await User.findOne({ username });
     if (userExists) {
       return res.status(400).json({
@@ -24,10 +14,8 @@ exports.register = async (req, res) => {
       });
     }
 
-    // Create user - password will be hashed by mongoose pre-save hook
     const user = await User.create({ username, password, role });
 
-    // Generate JWT token for immediate login
     const token = jwt.sign(
       { userId: user.id , role: user.role},
       process.env.JWT_SECRET,
@@ -47,15 +35,10 @@ exports.register = async (req, res) => {
   }
 };
 
-/**
- * Authenticate user and get token
- * @route POST /api/auth/login
- * @public - Anyone can access this route
- */
+
 exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
-    // Find user by username
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(401).json({
@@ -67,7 +50,6 @@ exports.login = async (req, res) => {
       });
     }
 
-    // Verify password using the comparePassword method from User model
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       return res.status(401).json({
@@ -79,7 +61,6 @@ exports.login = async (req, res) => {
       });
     }
 
-    // Generate JWT token on successful login
     const token = jwt.sign(
       { userId: user.id, role:user.role },
       process.env.JWT_SECRET,
@@ -107,14 +88,9 @@ exports.login = async (req, res) => {
   }
 };
 
-/**
- * Get all users in the system
- * @route GET /api/auth/users
- * @private - Only admins can access this route
- */
+
 exports.getUsers = async (req, res) => {
   try {
-    // Find all users but exclude password field
     const users = await User.find({}, "-password");
 
     res.json({
@@ -130,11 +106,7 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-/**
- * Get current user's profile
- * @route GET /api/auth/me
- * @private - Authenticated users only
- */
+
 exports.getProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.userId).select("-password");
