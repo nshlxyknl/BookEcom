@@ -12,11 +12,13 @@ export const Register = () => {
     const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+      const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handlereg= async (e) => {
   e.preventDefault();
-
+setLoading(true)
 try{
 const res= await fetch(`${API_URL}/logtype/register`,{
   method: "POST",
@@ -36,6 +38,8 @@ const res= await fetch(`${API_URL}/logtype/register`,{
     } catch (err) {
       console.error("Error registrating in:", err);
       toast.error("Something went wrong");
+    }finally{
+      setLoading(false)
     }
 
   }
@@ -59,7 +63,7 @@ const res= await fetch(`${API_URL}/logtype/register`,{
                                                      </SelectContent>
                                                        </Select>
                               <div className="flex justify-center">
-                               <Button type='submit' className="w-full sm:w-auto"> Register </Button>
+                               <Button type='submit' className="w-full sm:w-auto" disabled={loading}> {loading? "Registering..":"Register"} </Button>
                                </div>
                   <h3 className='text-center'> Already have an account? {""}
                     <Link to ="/login" className="text-blue-600 hover:underline">

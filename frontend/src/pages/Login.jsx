@@ -10,12 +10,14 @@ import { API_URL } from '@/config/api'
 export const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+        const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
   const { login } = useAuth();
 
 const handleSubmit = async (e) => {
     e.preventDefault();
-
+setLoading(true)
     try {
       const res = await fetch(`${API_URL}/logtype/login`, {
         method: "POST",
@@ -36,6 +38,8 @@ const handleSubmit = async (e) => {
     } catch (err) {
       console.error("Error logging in:", err);
       toast.error("Something went wrong");
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -50,7 +54,7 @@ const handleSubmit = async (e) => {
                         <Input type='text' placeholder='username' value={username} onChange={(e) => setUsername(e.target.value)} className={'p-4'} />
                         <Input type='password' placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} className={'p-4'} />
                         <div className="flex justify-center">
-                            <Button type='submit' className="w-full sm:w-auto"> Login </Button>
+                            <Button type='submit' className="w-full sm:w-auto" disabled={loading}> {loading? "Logging in..":"Login"} </Button>
                         </div>
                         <h3 className='text-center'> Don't have an account? {""}
                             <Link to="/register" className="text-blue-600 hover:underline">
