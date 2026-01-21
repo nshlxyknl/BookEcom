@@ -12,6 +12,7 @@ import { ManagePdf } from "./pages/UserPages/ManagePdf"
 import { ManageUsers } from "./pages/UserPages/ManageUsers"
 import { TotalSales } from "./pages/UserPages/TotalSales"
 import { Toaster } from "sonner"
+import { PaymentSuccess } from "./pages/UserPages/PaymentSuccess"
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   <Route path='/home' element={<PublicRoutes> <HomePage/> </PublicRoutes>}> </Route>
   <Route path='/register' element={<PublicRoutes> <Register/> </PublicRoutes> } ></Route>
   <Route path='/login' element={<PublicRoutes> <Login/> </PublicRoutes> } ></Route>
+  <Route path='/pay-success' element={<PublicRoutes> <PaymentSuccess/> </PublicRoutes> } ></Route>
   <Route path='/dashboard' element={<ProtectedRoutes> <Dashboard/> </ProtectedRoutes>}/> 
       <Route path='/seller/uploads' element={ <ProtectedRoutes>  <SellerUploads/> </ProtectedRoutes>}/> 
       <Route path='/seller/sales' element={ <ProtectedRoutes>  <TotalSales/> </ProtectedRoutes>}/> 

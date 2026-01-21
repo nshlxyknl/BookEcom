@@ -139,8 +139,8 @@ exports.payc = async (req, res) => {
 
             // }
             })),
-            success_url: `${CLIENT_URL}/login`,
-            cancel_url: `${CLIENT_URL}/login`,
+            success_url: `${CLIENT_URL}/pay-success`,
+            cancel_url: `${CLIENT_URL}/pay-cancel`,
             metadata: {
                 buyerId,
                 items: JSON.stringify(items),
