@@ -140,8 +140,8 @@ exports.payc = async (req, res) => {
 
             // }
             })),
-            success_url: `${CLIENT_URL}/dashboard`,
-            cancel_url: `${CLIENT_URL}/dashboard`,
+            success_url: `https://bookecom.vercel.app/dashboard`,
+            cancel_url: `https://bookecom.vercel.app/dashboard`,
             metadata: {
                 buyerId,
                 items: JSON.stringify(items),
