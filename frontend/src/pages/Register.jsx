@@ -6,6 +6,7 @@ import { Link, useNavigate} from 'react-router-dom'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from 'sonner'
 import { API_URL } from '@/config/api'
+import DotGrid from './Externalbits/DotGrid'
 
 export const Register = () => {
 
@@ -46,7 +47,22 @@ const res= await fetch(`${API_URL}/logtype/register`,{
 
 
   return (<>
-        <div className='flex justify-center items-center min-h-screen px-4'>
+  <div className="relative min-h-screen overflow-hidden">
+
+  <div className="absolute inset-0 ">
+    <DotGrid
+      dotSize={5}
+      gap={15}
+      baseColor="#271E37"
+      activeColor="#5227FF"
+      proximity={120}
+      shockRadius={250}
+      shockStrength={5}
+      resistance={750}
+      returnDuration={1.5}
+    />
+    </div>
+        <div className=' relative z- 10 flex justify-center items-center min-h-screen px-4'>
                    <Card className={'w-full max-w-md p-6'}>
                        <CardContent >
                            <h2 className='text-center text-2xl font-semibold mb-4'> Register </h2>
@@ -73,6 +89,7 @@ const res= await fetch(`${API_URL}/logtype/register`,{
                                 </form>
        </CardContent>
                    </Card>
+               </div>
                </div>
                </>
           

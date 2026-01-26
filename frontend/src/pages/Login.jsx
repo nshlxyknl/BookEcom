@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
 import { toast } from 'sonner'
 import { API_URL } from '@/config/api'
+import RippleGrid from './Externalbits/RippleGrid'
 
 export const Login = () => {
     const [username, setUsername] = useState("");
@@ -44,9 +45,22 @@ setLoading(true)
   };
 
     return (<>
-    
+    <div className="relative min-h-screen overflow-hidden">
 
-        <div className='flex justify-center items-center min-h-screen px-4'>
+  <div className="absolute inset-0 ">
+   <RippleGrid
+    enableRainbow={false}
+    gridColor="#ffffff"
+    rippleIntensity={0.05}
+    gridSize={10}
+    gridThickness={15}
+    mouseInteraction={true}
+    mouseInteractionRadius={1.2}
+    opacity={0.8}
+  />
+    </div>
+
+        <div className='relative z-10 flex justify-center items-center min-h-screen px-4'>
             <Card className={'w-full max-w-md p-6'}>
                 <CardContent >
                     <h2 className='text-center text-2xl font-semibold mb-4'> Login </h2>
@@ -64,6 +78,7 @@ setLoading(true)
                     </form>
                 </CardContent>
             </Card>
+        </div>
         </div>
         </>
     )
