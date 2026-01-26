@@ -5,18 +5,12 @@ const cloudinary = require("cloudinary").v2;
 
 
 
-/** 
- * Creates a new task in the system
- * Only admins can use this function (protected by middleware)
- * @param {Object} req - Express request object containing task details in body
- * @param {Object} res - Express response object
- */
+
 
 
 
 exports.uploadpdf = async (req, res) => {
   try {
-    // Extract task details from request body
     const { title, price } = req.body;
     const sellerId = req.user?.userId;
 
@@ -54,7 +48,7 @@ exports.uploadpdf = async (req, res) => {
       seller: sellerId,
     });
 
-    await task.populate("seller", "username"); // if 'seller' is a ref to User
+    await task.populate("seller", "username"); 
 
     res.status(201).json({
       task,
@@ -68,13 +62,9 @@ exports.uploadpdf = async (req, res) => {
   }
 };
 
-/**
- * Retrieves all tasks in the system
- * Only admins can use this function (protected by middleware)
- */
+
 exports.getallpdf = async (req, res) => {
   try {
-    // Find all tasks and include user details for assignedTo and assignedBy
     const tasks = await Task.find()
       .populate("seller", "username")
       .sort({ createdAt: -1 }); // Show newest tasks first
@@ -92,10 +82,7 @@ exports.getallpdf = async (req, res) => {
   }
 };
 
-/**
- * Gets tasks assigned to the logged-in user
- * Any authenticated user can access their own tasks
- */
+
 exports.getuserpdf = async (req, res) => {
   try {
     const tasks = await Task.find({ seller: req.user.userId })
@@ -115,11 +102,7 @@ exports.getuserpdf = async (req, res) => {
   }
 };
 
-/**
- * Updates the status of a task
- * Regular users can only update tasks assigned to them
- * Admins cannot update task status (by design)
- */
+
 exports.updateTaskStatus = async (req, res) => {
   try {
     // Security check: only update if task is assigned to the requesting user
@@ -150,10 +133,7 @@ exports.updateTaskStatus = async (req, res) => {
   }
 };
 
-/**
- * Deletes a task from the system
- * Only admins can delete tasks
- */
+
 exports.delpdf = async (req, res) => {
   try {
     const book = await Task.findById(req.params.id);
