@@ -43,6 +43,12 @@ export default function BuyerCard({ _id, title, price,productId, quantity, pdfUr
 
       const data = await res.json();
       console.log("my product", data)
+      console.log("Stripe URL:", data.url);
+
+if (!data.url) {
+  console.error("No URL returned from backend", data);
+  return;
+}
       window.location.href = data.url;
 
 
