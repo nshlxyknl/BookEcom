@@ -116,9 +116,7 @@ exports.payc = async (req, res) => {
     try {
         const {items, buyerId} = req.body;
 const clientUrl = 
-process.env.CLIENT_URL 
-// ||
-// 'http://localhost:5173';
+process.env.CLIENT_URL || 'http://localhost:5173';
 
         if (!items || !items.length) {
             return res.status(400).json({ message: "Cart is empty" });
