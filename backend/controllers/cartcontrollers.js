@@ -1,6 +1,5 @@
 const Cart = require("../models/Cart")
 const Book = require("../models/Book")
-//add button >buyerid >productid >db store >
 require("dotenv").config();
 
 
@@ -117,7 +116,7 @@ exports.payc = async (req, res) => {
     try {
         const {items, buyerId} = req.body;
         // console.log("heyyyyy",items)
-
+const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
 
         if (!items || !items.length) {
             return res.status(400).json({ message: "Cart is empty" });
@@ -140,8 +139,8 @@ exports.payc = async (req, res) => {
 
             // }
             })),
-            success_url: `https://bookecom.vercel.app/dashboard`,
-            cancel_url: `https://bookecom.vercel.app/dashboard`,
+            success_url: `${clientUrl}/dashboard?payment=success`,
+            cancel_url: `${clientUrl}/dashboard?payment=failed`,
             metadata: {
                 buyerId,
                 items: JSON.stringify(items),

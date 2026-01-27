@@ -28,6 +28,8 @@ export default function BuyerCard({ _id, title, price,productId, quantity, pdfUr
       const cart = [{ title, price, quantity: r, productId }]
       sessionStorage.setItem("purchasedItems", JSON.stringify(cart));
 
+      
+
       const res = await fetch(`${API_URL}/carttype/pay`, {
         method: "POST",
         headers: {
