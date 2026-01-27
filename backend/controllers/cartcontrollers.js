@@ -115,8 +115,10 @@ const stripe = require("stripe")(process.env.SECRET_KEY)
 exports.payc = async (req, res) => {
     try {
         const {items, buyerId} = req.body;
-        // console.log("heyyyyy",items)
-const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+const clientUrl = 
+process.env.CLIENT_URL 
+// ||
+// 'http://localhost:5173';
 
         if (!items || !items.length) {
             return res.status(400).json({ message: "Cart is empty" });
